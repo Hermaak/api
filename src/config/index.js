@@ -18,4 +18,4 @@ export const mongoConnectionString = env.LOCAL
 
 export const api_url = env.LOCAL
   ? "http://localhost:8000"
-  : "api.advancedtechspace.com";
+  : "https://api-master.onrender.com";
