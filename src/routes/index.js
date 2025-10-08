@@ -15,6 +15,7 @@ import panel from "./panel/index.js";
 import box from "./box/index.js";
 import house from "./house/index.js";
 import pastaEvidencias from "./pasta-evidencia/index.js";
+import cls from "./class/index.js";
 
 // EXPRESS CONFIG.
 const app = express();
@@ -36,5 +37,6 @@ app.use("/panel", panel);
 app.use("/box", box);
 app.use("/house", house);
 app.use("/pasta-evidencia", pastaEvidencias);
+app.use("/class/", cls);
 
 export default server;
