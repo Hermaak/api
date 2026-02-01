@@ -63,7 +63,7 @@ export const create = async (req, res) => {
     res.json(credit);
   } catch (error) {
     console.log(error);
-    res.status(409).json({});
+    res.status(409).json(error);
   }
 };
 
