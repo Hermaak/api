@@ -22,6 +22,8 @@ router.get("/cron", async (req, res) => {
   );
   res.json({});
 });
+
+// Api Mz
 router.get("/maputo/bairros/:distrito", getBairros);
 router.get("/maputo/distritos", getDistritos);
 router.get("/maputo/bairros", bairros);

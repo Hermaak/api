@@ -3,3 +3,4 @@ util
 .env
 *.db
 ./static/cronus-facturas/*
+./static/crediinvest/*

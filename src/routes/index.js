@@ -16,6 +16,8 @@ import box from "./box/index.js";
 import house from "./house/index.js";
 import pastaEvidencias from "./pasta-evidencia/index.js";
 import cls from "./class/index.js";
+import crediinvest from "./crediinvest/index.js";
+import ai from "./ai/index.js";
 
 // EXPRESS CONFIG.
 const app = express();
@@ -38,5 +40,7 @@ app.use("/box", box);
 app.use("/house", house);
 app.use("/pasta-evidencia", pastaEvidencias);
 app.use("/class/", cls);
+app.use("/crediinvest", crediinvest)
+app.use('/ai', ai)
 
 export default server;

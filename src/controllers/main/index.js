@@ -69,9 +69,15 @@ export const getDistritos = (req, res) => {
     path.join(__dirname, "../../static/api-bairros.xlsx")
   );
   const sheet_name_list = workbook.SheetNames;
-  const distritos = XLSX.utils.sheet_to_json(
-    workbook.Sheets[sheet_name_list[1]]
-  );
+  let distritos = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[1]]);
+
+  distritos = distritos.map((ds) => ({
+    ...ds,
+    bairros: XLSX.utils
+      .sheet_to_json(workbook.Sheets[sheet_name_list[2]])
+      .filter((b) => b.id_distrito == ds.id)
+      .map(({id, label}) => ({id, label})),
+  }));
 
   res.json(distritos);
 };
@@ -100,9 +106,9 @@ export const getResource = (req, res) => {
 
 export const cronusSendMsg = async (req, res) => {
   const data = req.body;
-  const {email, name} = data.contact;
+  const { email, name } = data.contact;
   const user = req.headers.user;
   const text = data.text;
   sendMail(email, `CRONUS > ${user}`, text);
-  res.json({})
-}
+  res.json({});
+};
