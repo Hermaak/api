@@ -8,7 +8,7 @@ export const create = async (req, res) => {
 
   try {
     const credit = await generatePDF(data);
-    
+
     res.json(credit);
   } catch (error) {
     console.log(error);
@@ -60,7 +60,9 @@ async function generatePDF(data) {
     .text(
       `Nome: ${data.nome} ${data.apelido}       BI: ${data.bi}       NUIT: ${data.nuit}`,
     )
-    .text(`Telefone: ${data.tel}  Valor requerido: ${data.valor} Mt`)
+    .text(
+      `Telefone: ${data.tel}  Valor requerido: ${formatCurrency(data.valor)} Mt   Valor à pagar: ${formatCurrency(Math.ceil(parseFloat(data.valor) * 1.28))} Mt`,
+    )
     .text(`Maputo, ${formatador.format(date).split(",")[0]}`, 100, 330, {
       align: "center",
     })
@@ -85,4 +87,13 @@ async function generatePDF(data) {
   }).save();
 
   return credit;
+}
+
+function formatCurrency(val) {
+  return new Intl.NumberFormat("pt-MZ", {
+    style: "decimal",
+    currency: "MZN",
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  }).format(val);
 }
