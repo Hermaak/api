@@ -11,6 +11,12 @@ export const home = (req, res) => {
   });
 };
 
+export const gotData = (req, res) => {
+  const data = req.body;
+  console.log(data)
+  res.json(data);
+};
+
 export const bairros = (req, res) => {
   const distrito = req.params.distrito;
 
@@ -66,7 +72,7 @@ export const getBairros = (req, res) => {
 
 export const getDistritos = (req, res) => {
   const workbook = XLSX.readFile(
-    path.join(__dirname, "../../static/api-bairros.xlsx")
+    path.join(__dirname, "../../static/api-bairros.xlsx"),
   );
   const sheet_name_list = workbook.SheetNames;
   let distritos = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[1]]);
@@ -76,7 +82,7 @@ export const getDistritos = (req, res) => {
     bairros: XLSX.utils
       .sheet_to_json(workbook.Sheets[sheet_name_list[2]])
       .filter((b) => b.id_distrito == ds.id)
-      .map(({id, label}) => ({id, label})),
+      .map(({ id, label }) => ({ id, label })),
   }));
 
   res.json(distritos);
